@@ -11,31 +11,18 @@ import java.util.Scanner;
 
 public class EmployeePayrollService {
 
-	public void empPayrollRead() throws IOException {
-		List<String> lines = Files.readAllLines(Paths.get(
-				"C:\\Users\\mesha\\OneDrive\\Desktop\\DataBase\\Day-27-IO_ReadWrite_JavaProgram\\src\\com\\io\\java\\Payroll_Service.txt"));
-		for (String line : lines) {
-			System.out.println(line);
-		}
+	public void listFilesDirectory()throws IOException{
+		Path playPath = Paths.get("C:\\Users\\mesha\\OneDrive\\Desktop\\DataBase\\Day-27-IO_ReadWrite_JavaProgram\\src\\com\\io\\java\\");
+		
+		
+		Files.list(playPath).filter(Files::isRegularFile).forEach(System.out::print);
+		Files.newDirectoryStream(playPath).forEach(System.out::println);
+		Files.newDirectoryStream(playPath,path->path.toFile().isFile() && path.toString().startsWith("temp"));
+		
 	}
-
-	public void writeDataEmployeePayRoll() throws IOException {
-		ArrayList<String> data = new ArrayList<>();
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter ID");
-		data.add(sc.next());
-		System.out.println("Enter Name");
-		data.add(sc.next());
-		System.out.println("Enter Salary");
-		data.add(sc.next());
-		Files.write(Paths.get(
-				"C:\\Users\\mesha\\OneDrive\\\\Desktop\\\\DataBase\\\\Day-27-IO_ReadWrite_JavaProgram\\\\src\\\\com\\\\io\\\\java\\\\Payroll_Service.txt"),
-				data, StandardOpenOption.CREATE);
-	}
-
 	public static void main(String[] args) throws IOException {
 		EmployeePayrollService emp = new EmployeePayrollService();
-		emp.writeDataEmployeePayRoll();
-		emp.empPayrollRead();
+		emp.listFilesDirectory();
 	}
+	
 }
