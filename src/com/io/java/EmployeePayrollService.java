@@ -23,16 +23,19 @@ import static java.nio.file.StandardWatchEventKinds.*;
 
 public class EmployeePayrollService {
 	
+public long listFilesDirectory() throws IOException, InterruptedException {
 
-	public void listFilesDirectory() throws IOException, InterruptedException  {
-		        
-	List<String> line=	Files.readAllLines(Paths.get("C:\\Users\\mesha\\OneDrive\\Desktop\\DataBase\\Day-27-IO_ReadWrite_JavaProgram\\src\\com\\io\\java\\TestDemo.txt"));
-			for(String lines:line) {
-				System.out.println(lines);
-			}
+		long enteries = 0;
+		enteries = Files.lines(new File(
+				"C:\\Users\\mesha\\OneDrive\\Desktop\\Blabz practice problem\\Day2Problems\\Day-27-IO-ReadWrite\\src\\testdemo.txt")
+				.toPath()).count();
+		System.out.println(enteries);
+		return enteries;
 	}
-public static void main(String[] args) throws IOException, InterruptedException {
-	EmployeePayrollService obj=new EmployeePayrollService();
-	obj.listFilesDirectory();
-}
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		EmployeePayrollService emp = new EmployeePayrollService();
+		emp.listFilesDirectory();
+
+	}
 }
